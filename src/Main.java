@@ -32,7 +32,8 @@ public class Main {
         List<T> list = stream.collect(Collectors.toList());
         Optional<T> min = list.stream().min(order);
         Optional<T> max = list.stream().max(order);
-        min.ifPresent(minVal -> max.ifPresent(maxVal -> minMaxConsumer.accept(minVal, maxVal)));
+          min.ifPresentOrElse(minVal -> max.ifPresent(maxVal -> minMaxConsumer.accept(minVal, maxVal)),
+                () -> minMaxConsumer.accept(null, null));
     }
 
     //Задание 1
